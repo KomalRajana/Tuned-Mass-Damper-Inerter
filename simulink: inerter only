@@ -1,0 +1,29 @@
+w=2*pi;m=5;k=w^2*m;c=2*0.05*m*w;
+mu=1;b=mu*m;
+load_system ('ANALYSE_UID_FREE')
+set_param('ANALYSE_UID_FREE','StartTime','0','FixedStep','0.001','StopTime','20','Limitdatapoints','off','Decimation','2');
+res_free=sim ('ANALYSE_UID_FREE');
+
+figure
+s(1)=subplot(4,1,1);
+plot(res_free.tout(1:1000),res_free.yout(1:1000,1));
+ylim([-1,1])
+ylabel(s(1),{'\it x\rm(t)','[m]'},'Interpreter','latex','FontSize',12,'FontWeight','bold')
+set(gca, 'YGrid','on');
+s(2)=subplot(4,1,2);
+plot(res_free.tout(1:1000),res_free.yout(1:1000,2));
+ylim([-6,6])
+ylabel(s(2),{'\it $\dot{x}\rm(t)$','[m/s]'},'Interpreter','latex','FontSize',12,'FontWeight','bold')
+set(gca, 'YGrid','on');
+s(3)=subplot(4,1,3);
+plot(res_free.tout(1:1000),res_free.yout(1:1000,3));
+ylim([-40,40])
+ylabel(s(3),{'\it $\ddot{x}(t)$','[$ \rm m/s^2$]'},'Interpreter','latex','FontSize',12,'FontWeight','bold')
+set(gca, 'YGrid','on');
+s(4)=subplot(4,1,4);
+plot(res_free.tout(1:1000),res_free.yout(1:1000,4));
+ylim([-70,70])
+ylabel(s(4),{'\it f_{CID}\rm(t)','[N]'},'Interpreter','tex','FontSize',8)
+xlabel(s(4),'Time(s)')
+set(gca, 'YGrid','on');
+title('FIGURE 4 Responses of the free vibration of the SDOF system with a CID','FontSize',12)
